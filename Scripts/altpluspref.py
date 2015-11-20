@@ -104,6 +104,17 @@ for dirpath, dirs, files in os.walk('../Files_Working_Directory'):
                         stwfile.write(line[0] + '\t' + line[1] + '\t' + line[2] + '\n')
 
 
+
+
+
+
+###########     KEY MUSS SOWOHL ALT.LABEL ALS AUCH PREF.LABEL SEIN
+###########     DANN BEIM ITERIEREN BEIDES SCHREIBEN
+
+
+
+
+
 # Processing STW Files to get skos:prefLabel
 GBV = Namespace('http://purl.org/ontology/gbv/#')
 STW = Namespace('http://zbw.eu/stw/')
