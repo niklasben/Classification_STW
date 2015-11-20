@@ -15,7 +15,7 @@ import shutil                                   # https://docs.python.org/2/libr
 
 
 # Check if Working File Directory exists. If not, create it
-if not os.path.exists('../File_Working_Directory'):
+if not os.path.exists('../Files_Working_Directory'):
     os.makedirs('../Files_Working_Directory')
 
 # Removing CSS from the crawled Files
