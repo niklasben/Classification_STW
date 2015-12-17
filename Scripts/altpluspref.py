@@ -110,6 +110,7 @@ for dirpath, dirs, files in os.walk('../Files_Working_Directory'):
 
 ###########     KEY MUSS SOWOHL ALT.LABEL ALS AUCH PREF.LABEL SEIN
 ###########     DANN BEIM ITERIEREN BEIDES SCHREIBEN
+###########     Zusätzlicher Deskriptor mit vorangestelltem $_Variable
 
 
 
