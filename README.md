@@ -1,5 +1,5 @@
 # Classification_STW
-Project to categorize Company Websites using the Standard Thesaurus Wirtschaft (STW) [Thesaurus for Economics] from the Leibniz Information Centre for Economics.
+Project to categorize Company Websites using the Standard Thesaurus Wirtschaft (STW - Thesaurus for Economics) from the [Leibniz Information Centre for Economics](http://www.zbw.eu/en/).
 
 ## Structure of the Directory
 ### Files_1
