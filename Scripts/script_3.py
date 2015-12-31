@@ -35,6 +35,7 @@ with open('stopwords_german.txt', 'r') as stopwords_file:
     for line in stopwords_file:
         stopwords.append(line.strip())
 
+# Check if Saving File Directory 3 exists. If not, create it
 if not os.path.exists('../Files_3'):
     os.makedirs('../Files_3')
 
