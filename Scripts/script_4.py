@@ -19,10 +19,10 @@ from rdflib import Graph                        # https://rdflib.readthedocs.org
 from rdflib.namespace import Namespace, SKOS    # https://rdflib.readthedocs.org/en/stable/apidocs/rdflib.html#module-rdflib.namespace
 
 
-# Check if Working File Directory exists. If not, create it
+# Check if Working File Directory exists. If not, create it.
 if not os.path.exists('../Files_Working_Directory'):
     os.makedirs('../Files_Working_Directory')
-# Check if Files_4  Directory exists. If not, create it
+# Check if Files_4  Directory exists. If not, create it.
 if not os.path.exists('../Files_4'):
     os.makedirs('../Files_4')
 
@@ -32,7 +32,7 @@ if not os.path.exists('../Files_4'):
 
 
 
-# 1. Removing CSS from the crawled Files
+# Removing CSS from the crawled Files.
 for dirpath, dirs, files in os.walk('../Files_Crawled'):
     for filename in fnmatch.filter(files, '*_crawled.xml_clean.xml'):
         with open('../Files_Crawled/'+filename, 'r') as originalfile, 
@@ -45,7 +45,7 @@ for dirpath, dirs, files in os.walk('../Files_Crawled'):
                     stwfile.write(line)
 
 
-# 2. Removing XML Structure from crawled Files
+# Removing XML Structure from crawled Files.
 replacements = {
                 '<?xml version="1.0" encoding="utf-8"?>':'',
                 '<root>':'',
@@ -66,7 +66,7 @@ for dirpath, dirs, files in os.walk('../Files_Working_Directory'):
                     stwfile.write(line)
 
 
-# 3. Removing German Stopwords from the Files
+# Removing German Stopwords from the Files.
 stopwords = []
 # Download Link to the German Stopword List that is used here: http://members.unine.ch/jacques.savoy/clef/germanST.txt
 with open('stopwords_german.txt', 'r') as stopwords_file:
@@ -98,7 +98,7 @@ for dirpath, dirs, files in os.walk('../Files_Working_Directory'):
                         stwfile.write(n + ' ')
 
 
-# 4. Lemmatizing and Tagging German Words
+# Lemmatizing and Tagging German Words.
 tagger = ttw.TreeTagger(TAGLANG='de')
 
 for dirpath, dirs, files in os.walk('../Files_Working_Directory'):
@@ -124,7 +124,7 @@ for dirpath, dirs, files in os.walk('../Files_Working_Directory'):
                         stwfile.write(line[0] + '\t' + line[1] + '\t' + line[2] + '\n')
 
 
-# 5. Processing STW Files to get skos:prefLabel
+# Processing STW Files to get skos:prefLabel.
 GBV = Namespace('http://purl.org/ontology/gbv/#')
 STW = Namespace('http://zbw.eu/stw/')
 ZBWTEXT = Namespace('http://zbw.eu/namespaces/zbw-extensions/')
@@ -164,7 +164,7 @@ for dirpath, dirs, files in os.walk('../Files_Working_Directory'):
                                 tagfile.write(n[0] + '\t' + n[1] + '\t' + str(row) + '\n')
 
 
-# 6. Remove Strings from STW Files to get only skos:prefLabel in the Files
+# Remove Strings from STW Files to get only skos:prefLabel in the Files.
 replacements_stw = {
                     '(rdflib.term.Literal(u\'': '',
                     '\', lang=u\'de\'),)': '',
@@ -190,7 +190,7 @@ for dirpath, dirs, files in os.walk('../Files_Working_Directory'):
                 newfile.write(line)
 
 
-# 7. Replace skos:altLabel with skos:prefLabel in the Files
+# Replace skos:altLabel with skos:prefLabel in the Files.
 for dirpath, dirs, files in os.walk('../Files_Working_Directory'):
     for filename in fnmatch.filter(files, '*_ohne_css_stop_test.xml'):
         with open('../Files_Working_Directory/'+filename, 'r') as openfile, 
@@ -211,7 +211,7 @@ for dirpath, dirs, files in os.walk('../Files_Working_Directory'):
                     newfile.write(i + ' ')
 
 
-# 8. Replace whatever is written for German Umlaute with the correct German Letter
+# Replace whatever is written for German Umlaute with the correct German Letter.
 replacements_uml = {
                     '\\xe4': 'ä',
                     '\\xfc': 'ü',
@@ -237,7 +237,7 @@ for dirpath, dirs, files in os.walk('../Files_Working_Directory'):
                     line = line.replace(src, target)
                 newfile.write(line)
 
-# 9. Restructuring the Files with the skos:prefLabel only to make them readable by RapidMiner
+# Restructuring the Files with the skos:prefLabel only to make them readable by RapidMiner.
 for dirpath, dirs, files in os.walk('../Files_Working_Directory'):
     for filename in fnmatch.filter(files, '*_nur_pref_clean_uml_stw.xml'):
         with open('../Files_Working_Directory/'+filename, 'r') as openfile, 
@@ -252,5 +252,5 @@ for dirpath, dirs, files in os.walk('../Files_Working_Directory'):
 ##################################
 
 
-# Remove unnecessary Working Files including Directory
+# Remove unnecessary Working Files including Directory.
 shutil.rmtree('../Files_Working_Directory')
