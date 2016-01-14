@@ -21,6 +21,7 @@ if not os.path.exists('../Files_Working_Directory'):
 if not os.path.exists('../Files_3'):
     os.makedirs('../Files_3')
 
+
 # Removing CSS from the crawled Files
 for dirpath, dirs, files in os.walk('../Files_Crawled'):
     for filename in fnmatch.filter(files, '*_crawled.xml_clean.xml'):
@@ -39,6 +40,7 @@ stopwords = []
 with open('stopwords_german.txt', 'r') as stopwords_file:
     for line in stopwords_file:
         stopwords.append(line.strip())
+
 
 # Check if Saving File Directory 3 exists. If not, create it.
 if not os.path.exists('../Files_3'):

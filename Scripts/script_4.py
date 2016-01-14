@@ -27,28 +27,7 @@ if not os.path.exists('../Files_4'):
     os.makedirs('../Files_4')
 
 
-
-
-
-############################
-
-
-
-
-# Removing CSS from the crawled Files.
-for dirpath, dirs, files in os.walk('../Files_Crawled'):
-    for filename in fnmatch.filter(files, '*_crawled.xml_clean.xml'):
-        with open('../Files_Crawled/'+filename, 'r') as originalfile, 
-        open('../Files_Working_Directory/'+filename[:-21]+'ohne_css_test.xml', 'w') as testfile, 
-        open('../Files_Working_Directory/'+filename[:-21]+'ohne_css_stw.xml', 'w') as stwfile:
-            for line in originalfile:
-                if line.strip():
-                    line = re.sub(r'[\w]*[:|.|#][\w]*[ ]?{[\w\W]*}', '', line, re.M)
-                    testfile.write(line)
-                    stwfile.write(line)
-
-
-# Removing XML Structure from crawled Files.
+# Removing XML-Structure and CSSfrom crawled Files.
 replacements = {
                 '<?xml version="1.0" encoding="utf-8"?>':'',
                 '<root>':'',
@@ -58,7 +37,7 @@ replacements = {
                 '</item>':'',
                 '</root>':''
                 }
-# Removing CSS from the crawled Files.
+
 for dirpath, dirs, files in os.walk('../Files_Crawled'):
     for filename in fnmatch.filter(files, '*_crawled.xml_clean.xml'):
         with open('../Files_Crawled/'+filename, 'r') as originalfile, 
@@ -138,6 +117,8 @@ for dirpath, dirs, files in os.walk('../Files_Working_Directory'):
                         stwfile.write(line[0] + '\t' + line[1] + '\t' + line[2] + '\n')
 
 
+############################
+
 # Processing STW Files to get skos:prefLabel.
 GBV = Namespace('http://purl.org/ontology/gbv/#')
 STW = Namespace('http://zbw.eu/stw/')
@@ -203,6 +184,9 @@ for dirpath, dirs, files in os.walk('../Files_Working_Directory'):
                 line = pattern.sub(lambda m: replacements_stw[re.escape(m.group(0))], line)
                 newfile.write(line)
 
+
+
+# # # ADD skos:prefLabel to every Label with an added $pref_ in front of it # # #
 
 # Replace skos:altLabel with skos:prefLabel in the Files.
 for dirpath, dirs, files in os.walk('../Files_Working_Directory'):
