@@ -41,13 +41,14 @@ replacements = {
 for dirpath, dirs, files in os.walk('../Files_Crawled'):
     for filename in fnmatch.filter(files, '*_crawled.xml_clean.xml'):
         with open('../Files_Crawled/'+filename, 'r') as originalfile, 
-        open('../Files_Working_Directory/'+filename[:-21]+'ohne_css_test.xml', 'w') as testfile, 
+        open('../Files_Working_Directory/'+filename[:-21]+'ohne_css_test.xml', 'w') as testfile, #### ?????????
         open('../Files_Working_Directory/'+filename[:-21]+'ohne_css_stw.xml', 'w') as stwfile:
             for line in originalfile:
                 if line.strip():
                     line = re.sub(r'[\w]*[:|.|#][\w]*[ ]?{[\w\W]*}', '', line, re.M)
                     testfile.write(line)
                     stwfile.write(line)
+
 for dirpath, dirs, files in os.walk('../Files_Working_Directory'):
     for filename in fnmatch.filter(files, '*_ohne_css_stw.xml'):
         with open('../Files_Working_Directory/'+filename, 'r') as originalfile, 
